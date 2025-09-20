@@ -17,28 +17,34 @@ class BoardArray : public Board {
             // TODO: IMPLEMENT THIS FUNCTION
             // ALGORITHM IS PROVIDED IN INSTRUCTIONS.TXT
 
-            int pos = index;
-           for(int i = 0 ; i < index ; i++){
-            if(entry-> compare(&array[i])){
-                pos = i;
-                for(int j = index ; j > pos ; j--){
-                    array[j] = array[j-1];
+            if(index == SIZE){
+                if(!entry ->compare(&array[index - 1])){
+                    cout << entry -> name << "'s score is too low to be added!" << endl;
+                    return;
                 }
-                array[pos] = *entry;
-            }
-            if(pos == SIZE && index <= SIZE){
-                cout << entry -> name << "'s score is too low to be added!" << endl;
-            }
-            if(index < SIZE){
-                index++;
             }
 
+            int pos = index;
+
+            for(int i = 0 ; i < index ; i++){
+                if(entry->compare(&array[i])){
+                    pos = i;
+                    break;
+                }
+            }
+
+            for(int j = index ; j > pos ;j--){
+                array[j] = array[j - 1];
+            }
+
+            array[pos] = *entry;
+            index++;
             return;
-           }
+           
         }
 
         void print() {
-            for (int i = 0; i < index; i++) {
+            for (int i = 0; i < index ; i++) {
                 cout << i + 1 << ". ";
                 array[i].print();
             }
