@@ -14,21 +14,27 @@ class BoardArray : public Board {
         }
 
         void add(Entry* entry) {
-            //makabuang sir
-            int pos = 0;
+        int pos = 0;
 
-            while (pos < index && !entry->compare(&array[pos])) {
-                pos++;
+   
+            int i = 0;
+
+            while(i < index){
+                if(!entry ->compare(&array[i])){
+                    pos++;
+                } else{
+                    break;
+                }
+                i++;
             }
-
+            //condition if index is less than 5(SIZE)
             if (index < SIZE) {
                 for (int i = index; i > pos; i--) {
                     array[i] = array[i - 1];
                 }
                 array[pos] = *entry;
                 index++;
-            }
-            else {
+            }else {
                 if (entry->compare(&array[SIZE - 1])) {
                     for (int i = SIZE - 1; i > pos; i--) {
                         array[i] = array[i - 1];
@@ -39,6 +45,7 @@ class BoardArray : public Board {
                 }
             }
         }
+
         void print() {
             for (int i = 0; i < index ; i++) {
                 cout << i + 1 << ". ";
